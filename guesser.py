@@ -45,6 +45,13 @@ class Guesser(object):
         tic = time.time()
         while correct_letters < len(word):
             guess = self.guess_letter(''.join(incomplete_word))
+            if guess == -1:
+                print "Something went wrong! Exiting."
+                print "guesses:", guesses
+                print "word:", ''.join(word)
+                print "guess so far:", incomplete_word
+                return
+
             if verbose == True:
                 print guess
             guesses.append(guess)
