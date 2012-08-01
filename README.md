@@ -44,3 +44,13 @@ The output is:
     "word": "chemurgic"
 }
 ```
+
+## Testing on dirty words.
+
+I tested the hangman guesser against a [list of dirty words](https://github.com/jake/collections/blob/master/profanities.txt). It did not perform very well:
+
+    TOTAL WORDS: 505
+    TOTAL GUESSES: 9236
+    TOTAL WINS: 94
+    TOTAL LOSSES: 411
+    WIN PERCENT: 18.6138613861
