@@ -15,14 +15,22 @@ class NaiveGuesser(Guesser):
         self.default_dist = self.get_letter_order('_')
 
     def guess_letter(self, incomplete_word):
+        
+        # get the letter order using the information in the incomplete word
         letter_order = self.get_letter_order(incomplete_word)
+
+        # letter_order might not include ALL letters, so stick those on the end.
+        letter_order.extend(self.default_dist)
+
         for letter in letter_order:
             if letter in self.guessed_letters:
-                # print 'already guessed:', letter
                 continue
             self.guessed_letters.append(letter)
             return letter
-        return letter_order
+
+        # something's wrong.
+        return -1
+
 
     def get_letter_order(self, incomplete_word):
         '''
