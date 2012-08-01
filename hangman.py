@@ -10,7 +10,9 @@ if __name__ == '__main__':
     dirty_words = [i.strip() for i in dirty_words.split('\n')]
 
     total_guesses = 0
-    for i, word in enumerate(dirty_words):
+    wins = 0
+    losses = 0
+    for word in dirty_words:
         G = NaiveGuesser()
 
         # keep only letters and apostrophe
@@ -18,8 +20,16 @@ if __name__ == '__main__':
 
         stats = G.guess_word(word, verbose=False)
         total_guesses += stats['guess_count']
-
-        print "Word %s : %s Guesses (%s) : %s" % (i, word, stats['guess_count'], stats['guesses'])
+        if stats['success']:
+            success = 'WIN '
+            wins += 1
+        else:
+            success = 'LOSE'
+            losses += 1
+        print "%s Word: %s Guesses (%s): %s" % (success, word, stats['guess_count'], stats['guesses'])
 
     print "TOTAL WORDS:", len(dirty_words)
     print "TOTAL GUESSES:", total_guesses
+    print "TOTAL WINS:", wins
+    print "TOTAL LOSSES:", losses
+    print "WIN PERCENT:", 100.*(wins*1./(wins+losses))
